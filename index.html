@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  background-color: rgba(90, 168, 247, 0.582);
+
+}
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  height: 80vh;
+  width: 60vw;
+  background-color: rgba(236, 231, 238, 0.664);
+  box-shadow: 15px 15px 15px rgba(15, 22, 43, 0.507), 3px 3px 7px rgb(143, 250, 250);
+  border-radius: 3px;
+  border: 5px double rgb(29, 93, 95);
+}
+#listTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  background-color: rgba(3, 80, 13, 0.363);
+  font-size: 38px;
+  border-bottom: 3px double sienna;
+  color:rgb(255, 249, 245);
+  text-shadow: 2px 2px 2px rgb(2, 31, 2);
+  height: 38px;
+
+}
+#listsAndToDos {
+  display: flex;
+  flex-grow: 10;
+  background-color: rgb(255, 249, 245);
+  height: 100px;
+}
+#allLists {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 5px;
+  flex-grow: 1;
+  border-right: 10px double rgba(29, 34, 65, 0.507);
+  overflow-y: scroll;
+  width: 200px;
+
+
+
+}
+#toDos {
+  display: flex;
+  padding: 5px;
+  flex-grow: 4;
+  overflow-y: scroll;
+  width: 200px;
+  flex-direction: column;
+  align-items: stretch;
+
+}
+.list{
+  font-size: 24px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  background-color: rosybrown;
+  height: 30px;
+  border: 2px outset rgb(122, 46, 46);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
+  color: rgb(255, 249, 245);
+  text-shadow: 2px 2px 2px rgb(31, 2, 2);
+  margin-bottom: 5px;
+  transition: transform 450ms ease-in-out;
+}
+
+.toDo {
+  font-size: 20px;
+  padding: 5px;
+  height: 50px;
+  background-color: rgba(40, 60, 124, 0.603);
+  border: 2px outset rgb(55, 45, 99);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(255, 249, 245);
+  text-shadow: 2px 2px 2px rgb(2, 5, 31);
+  margin-bottom: 5px;
+  transition: transform 250ms ease-in-out;
+}
+.list:hover, .toDo:hover{
+  
+  transform: scale(.98);
+}
+
+.addButton {
+  box-shadow: 11px 11px 11px black;
+}
+.toDoLabel{
+  flex-grow: 1;
+  /* background-color: rgba(137, 43, 226, 0.26); */
+
+}
+
+.hiddenBtn {
+  align-self: flex-end;
+  justify-self: center;
+  
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute; 
+  padding: 10px;
+  color: white;
+  height: 69vh;
+  width: 60vw;
+  top: 17vh;
+  background-color: #244077f5;
+  opacity: 0%;
+  z-index: -1;
+  box-shadow: 8px 8px 8px black;
+  text-shadow: 1px 1px 1px black;
+  transition: all 700ms ease-in-out; 
+  text-shadow: 2px 2px 1px black;
+  
+}
+#formTitle{
+  margin-bottom: 10px;
+  font-size: 36px;
+  justify-self: center;
+}
+#formInputs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+
+}
+.formInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+  
+  
+}
+label {
+  margin-bottom: 5px;
+}
+#checkboxes {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+</style>
+<head>
+  
+  <title>To Do List</title>
+  <script defer src="./index.js"></script>
+</head>
+<body>
+  
+  <div id="content">
+    <div id="listTitle">To Do Lists</div>
+    <div id="listsAndToDos">
+    <div id="allLists">
+      
+      <div id="firstList" class="list">My First List</div>
+      
+
+    </div>
+    <div id="toDos">
+      <div id="test1" class="toDo">Test To Do 1</div>
+     
+
+    </div>
+  </div>
+  </div>
+  <div id="buttons">
+    <button id="newListBtn" class="addButton">New List</button>
+    <button id="newToDoBtn" class="addButton">New To-Do</button>
+    <button id="loadListsBtn">Load Lists</button>
+  </div>
+  <div id="form" class="form">
+    
+    <div id="formTitle">To Do's Current Name</div>
+    <form>
+    <div id="formInputs">
+      <div id="nameInput" class="formInput">
+        <label for id="name">New To Do Name:</label>
+       <input id="nameInput" type="text" placeholder="name">
+      </div>
+      <div id="dueDateInput" class="formInput">
+        <label for id="dueDate">How long do you want to give yourself?:</label>
+       <input id="dueDateInput" name="dueDate" type="number" min="1" placeholder="how long?">
+       <div id="checkboxes">
+        <form>
+        <input type="radio" id="minutes" name="timer" value="minutes" checked>
+        <label for="minutes">minutes</label><br>
+        <input type="radio" id="hours" name="timer" value="hours">
+        <label for="hours">hours</label><br>
+        <input type="radio" id="days" name="timer" value="days">
+        <label for="days">days</label>
+       
+      </div>
+      </div>
+      <div id="priorityInput" class="formInput">
+        <label for id="priority">Priority:</label>
+        <label for id="priority">1 - - 2 - - 3 - - 4 - - 5</label>
+       <input id="priorityInput" min="1" max="5" type="range" placeholder="3"> 
+      </div>
+      <label for id="complete">Mark as Complete?</label>
+      <input id="complete" type="checkbox">
+      <br>
+      <input type="reset">
+    </div>
+  </form>
+    <div id="formBtns">
+    <button id="submitBtn">Submit</button>
+    <button id="cancelBtn">Cancel</button>
+    
+    
+  </div>
+  
+  </div>
+</body>
+</html>
