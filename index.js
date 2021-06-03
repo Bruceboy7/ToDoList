@@ -100,8 +100,16 @@ const renderLists = () => {
 
 
 }
+const saveLists = () => {
+  console.log("saving Lists")
+  window.localStorage.setItem('savedLists', JSON.stringify(lists))
+  console.log(lists)
+}
 const loadLists = () => {
   console.log("loading Lists")
+  let storedLibrary = JSON.parse(window.localStorage.getItem("savedLists"))
+  console.log(storedLibrary)
+  
 }
 const renderList = () => {
   
@@ -142,7 +150,7 @@ const renderList = () => {
         renderList()
       })
       $deleteBtn.addEventListener("click", function (e) {
-        currentList.deleteToDo(currentList.updateToDos()[i])
+        console.log(currentList["toDos"])
       })
       allToDos[i].appendChild($hiddenBtns)
       $hiddenBtns.appendChild($deleteBtn)
@@ -160,15 +168,37 @@ const renderList = () => {
     }
  
 }
+//Function to clear the window once made
+let clearEditWindow = () => {
+  $form.style.opacity = 0;
+  $form.style.zIndex = -1;
 
-const editStuff = ($target) => {
-  let targetObject = ((currentList.updateToDos()[$target.id.replace("toDo", "") - 1]))
-  console.log($form.children[1].children[0].children)
+
+
+  $content.style.pointerEvents = "auto"
+  $newListBtn.style.pointerEvents = "auto"
+  $newToDoBtn.style.pointerEvents = "auto"
+
   
+  }
+  let targetObject = new ToDo("tester")
+const editStuff = ($target) => {
+
+  //find the specific To do List item to edit
+  targetObject = ((currentList.updateToDos()[$target.id.replace("toDo", "") - 1]))
+
+  console.log(targetObject.updateName())
+
+
+
+  //render the form
   $form.style = `opacity: 100%; height: auto; width: auto; z-index: 2; `
   let title = $form.children[0]
   title.textContent = targetObject.updateName()
+  let newDueDateSpan = "minutes"
   
+  
+  //make placeholder the Current Title
   let newTitle = $form.children[1].children[0].children[0].children[1]
   newTitle.placeholder = targetObject.updateName()
   
@@ -179,9 +209,37 @@ const editStuff = ($target) => {
   
   console.log(`editing ${targetObject.updateName()}`)
   
-  // targetObject.updateName(prompt("new name?:"))
+ 
 
+  //button logic
+  $cancelBtn.addEventListener("click", function (e) {
+    clearEditWindow()
+  })
+  
+  $submitBtn.addEventListener("click", function (e) {
+    
+    //do submitting logic
+
+    //Get any input values
+    let newTitle = $form.children[1].children[0].children[0].children[1].value
+    let newDueDate = $form.children[1].children[0].children[1].children[1].value
+    console.log(newDueDateSpan)
+
+    if (newTitle) {
+    console.log("new title is " + newTitle)
+    
+     console.log(targetObject.updateName(newTitle))
+     $form.children[1].children[0].children[0].children[1].value = ''
+    
+    renderList()
+    clearEditWindow()
+    }
+
+
+  })
+  
 }
+
 let lists = []
 
 let currentList = {}
@@ -198,16 +256,7 @@ const $cancelBtn = document.getElementById("cancelBtn")
 const $loadListsBtn = document.getElementById("loadListsBtn")
 
 
-$cancelBtn.addEventListener("click", function (e) {
-  $form.style.opacity = 0;
-  $form.style.zIndex = -1;
 
-
-
-  $content.style.pointerEvents = "auto"
-  $newListBtn.style.pointerEvents = "auto"
-  $newToDoBtn.style.pointerEvents = "auto"
-})
 
 $newListBtn.addEventListener("click", function (e) {
 lists[lists.length] = new List()

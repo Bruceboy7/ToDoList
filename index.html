@@ -93,22 +93,30 @@ body{
   color: rgb(255, 249, 245);
   text-shadow: 2px 2px 2px rgb(2, 5, 31);
   margin-bottom: 5px;
-  transition: transform 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
 }
 .list:hover, .toDo:hover{
   
   transform: scale(.98);
 }
 
-.addButton {
+.Button {
   box-shadow: 11px 11px 11px black;
+  background-color: cornsilk;
 }
 .toDoLabel{
   flex-grow: 1;
   /* background-color: rgba(137, 43, 226, 0.26); */
 
 }
-
+.selected {
+  transform: scale(.98);
+  border: inset red;
+}
+.disabled{
+  pointer-events: none;
+  opacity: 50%;
+}
 .hiddenBtn {
   align-self: flex-end;
   justify-self: center;
@@ -169,7 +177,7 @@ label {
 <head>
   
   <title>To Do List</title>
-  <script defer src="./index.js"></script>
+  <script defer src="newJs.js"></script>
 </head>
 <body>
   
@@ -190,9 +198,11 @@ label {
   </div>
   </div>
   <div id="buttons">
-    <button id="newListBtn" class="addButton">New List</button>
-    <button id="newToDoBtn" class="addButton">New To-Do</button>
-    <button id="loadListsBtn">Load Lists</button>
+    <button id="deleteListBtn" onclick="deleteList()" class="Button">Delete List</button>
+    <button id="newListBtn" onclick="newList()" class="Button">New List</button>
+    <button id="newToDoBtn" onclick="newToDo()" class="Button">New To-Do</button>
+    <button id="loadListsBtn" onclick="loadLists()" class="Button">Load Lists</button>
+    <button id="saveListsBtn" onclick="saveLists()" class="Button">Save Lists</button>
   </div>
   <div id="form" class="form">
     
@@ -209,9 +219,9 @@ label {
        <div id="checkboxes">
         <form>
         <input type="radio" id="minutes" name="timer" value="minutes" checked>
-        <label for="minutes">minutes</label><br>
+        <label for="minutes">minutes</label>
         <input type="radio" id="hours" name="timer" value="hours">
-        <label for="hours">hours</label><br>
+        <label for="hours">hours</label>
         <input type="radio" id="days" name="timer" value="days">
         <label for="days">days</label>
        
